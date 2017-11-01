@@ -1,9 +1,20 @@
-def main(argv):
-  # このコードは引数と標準出力を用いたサンプルコードです。
-  # このコードは好きなように編集・削除してもらって構いません。
-  # ---
-  # This is a sample code to use arguments and outputs.
-  # Edit and remove this code as you like.
+import requests
+import pya3rt
+import json
 
-  for i, v in enumerate(argv):
-    print("argv[{0}]: {1}".format(i, v))
+def main(argv):
+
+	apikey = {
+	"talk":"EQ9oy99wFbKhOPsC72wQf2o8VRAiAcmM",
+	"classification":"he8d4f19qXWFISJzo0dgu2XlYShCo2Zy"
+	}
+	#client1 = pya3rt.TalkClient(apikey["talk"])
+	#print(client1.talk("おはよう"))
+
+	#client = pya3rt.TextClassificationClient(apikey["classification"])
+
+	for i, v in enumerate(argv):
+		payload = {'apikey': apikey["classification"], 'model_id':"","text":v}
+		r = requests.post('https://api.a3rt.recruit-tech.co.jp/text_classification/v1/classify', data=json.dumps(payload))
+		print(r.text)
+
